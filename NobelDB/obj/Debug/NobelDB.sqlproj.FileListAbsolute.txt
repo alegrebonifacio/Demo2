@@ -1,0 +1,9 @@
+C:\Users\claud\Source\Repos\Demo2\NobelDB\obj\Debug\NobelDB.dll
+C:\Users\claud\Source\Repos\Demo2\NobelDB\obj\Debug\NobelDB.pdb
+C:\Users\claud\Source\Repos\Demo2\NobelDB\bin\Debug\NobelDB.dacpac
+C:\Users\claud\Source\Repos\Demo2\NobelDB\bin\Debug\NobelDB.dll
+C:\Users\claud\Source\Repos\Demo2\NobelDB\bin\Debug\NobelDB.pdb
+C:\Users\claud\Source\Repos\Demo2\NobelDB\obj\Debug\Model.xml
+C:\Users\claud\Source\Repos\Demo2\NobelDB\obj\Debug\refactor.xml
+C:\Users\claud\Source\Repos\Demo2\NobelDB\obj\Debug\postdeploy.sql
+C:\Users\claud\Source\Repos\Demo2\NobelDB\obj\Debug\predeploy.sql

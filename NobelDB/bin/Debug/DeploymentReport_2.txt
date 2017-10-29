@@ -1,0 +1,44 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Categoria] (Table)
+       [dbo].[Cidade] (Table)
+       [dbo].[Cidade].[IX_Cidade] (Index)
+       [dbo].[Filiacao] (Table)
+       [dbo].[Filiacao].[IX_Filiacao] (Index)
+       [dbo].[Laureado] (Table)
+       [dbo].[LaureadoIndividuo] (Table)
+       [dbo].[LaureadoIndividuoFiliacao] (Table)
+       [dbo].[LaureadoOrganizacao] (Table)
+       [dbo].[LaureadoPremioNobel] (Table)
+       [dbo].[Pais] (Table)
+       [dbo].[Pais].[IX_Pais] (Index)
+       [dbo].[PremioNobel] (Table)
+       [dbo].[FK_Cidade_Cidade] (Foreign Key)
+       [dbo].[FK_Cidade_Pais] (Foreign Key)
+       [dbo].[FK_Filiacao_Cidade] (Foreign Key)
+       [dbo].[FK_Individuo_Cidade] (Foreign Key)
+       [dbo].[FK_Individuo_Cidade1] (Foreign Key)
+       [dbo].[FK_Individuo_Laureado] (Foreign Key)
+       [dbo].[FK_LaureadoIndividuoFiliacao_Filiacao] (Foreign Key)
+       [dbo].[FK_LaureadoIndividuoFiliacao_LaureadoIndividuo] (Foreign Key)
+       [dbo].[FK_LaureadoOrganizacao_Laureado] (Foreign Key)
+       [dbo].[FK_LaureadoPremioNobel_Laureado] (Foreign Key)
+       [dbo].[FK_LaureadoPremioNobel_PremioNobel] (Foreign Key)
+       [dbo].[FK_Pais_Pais] (Foreign Key)
+       [dbo].[FK_PremioNobel_Categoria] (Foreign Key)
+       [dbo].[CK_Laureado] (Check Constraint)
+       [dbo].[PaisAtual] (Function)
+       [dbo].[LaureadosPorPaisAtual] (Procedure)
+       [dbo].[CK_Laureado].[MS_Description] (Extended Property)
+
+** Supporting actions

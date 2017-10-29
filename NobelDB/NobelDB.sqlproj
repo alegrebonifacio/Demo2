@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>NobelDB</RootNamespace>
     <AssemblyName>NobelDB</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -23,6 +23,8 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -57,5 +59,32 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Scripts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Laureado.sql" />
+    <Build Include="dbo\Tables\LaureadoPremioNobel.sql" />
+    <Build Include="dbo\Tables\LaureadoIndividuoFiliacao.sql" />
+    <Build Include="dbo\Tables\Categoria.sql" />
+    <Build Include="dbo\Tables\PremioNobel.sql" />
+    <Build Include="dbo\Tables\LaureadoOrganizacao.sql" />
+    <Build Include="dbo\Tables\Filiacao.sql" />
+    <Build Include="dbo\Tables\Pais.sql" />
+    <Build Include="dbo\Tables\Cidade.sql" />
+    <Build Include="dbo\Tables\LaureadoIndividuo.sql" />
+    <Build Include="dbo\Functions\PaisAtual.sql" />
+    <Build Include="dbo\Stored Procedures\LaureadosPorPaisAtual.sql" />
+    <None Include="Scripts\SeedDB.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaCompare1.scmp" />
+    <None Include="NobelDB.publish.xml" />
   </ItemGroup>
 </Project>
