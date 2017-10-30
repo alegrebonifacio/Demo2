@@ -3,3 +3,8 @@ C:\Users\claud\Source\Repos\Demo2\NobelDB\obj\Debug\NobelDB.pdb
 C:\Users\claud\Source\Repos\Demo2\NobelDB\bin\Debug\NobelDB.dacpac
 C:\Users\claud\Source\Repos\Demo2\NobelDB\bin\Debug\NobelDB.dll
 C:\Users\claud\Source\Repos\Demo2\NobelDB\bin\Debug\NobelDB.pdb
+C:\Projectos\Demo2\NobelDB\bin\Debug\NobelDB.dacpac
+C:\Projectos\Demo2\NobelDB\bin\Debug\NobelDB.dll
+C:\Projectos\Demo2\NobelDB\bin\Debug\NobelDB.pdb
+C:\Projectos\Demo2\NobelDB\obj\Debug\NobelDB.dll
+C:\Projectos\Demo2\NobelDB\obj\Debug\NobelDB.pdb

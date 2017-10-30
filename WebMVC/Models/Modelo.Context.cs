@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebMVC
+namespace WebMVC.Models
 {
     using System;
     using System.Data.Entity;

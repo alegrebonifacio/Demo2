@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\NobelDB"
+    "\\NobelDB",
+    "\\WebMVC"
   ],
   "SelectedNode": "\\NobelDB\\NobelDB.sqlproj",
   "PreviewInSolutionExplorer": false

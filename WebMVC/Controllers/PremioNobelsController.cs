@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WebMVC;
+using WebMVC.Models;
 
 namespace WebMVC.Controllers
 {
@@ -17,7 +17,7 @@ namespace WebMVC.Controllers
         // GET: PremioNobels
         public ActionResult Index()
         {
-            var premioNobel = db.PremioNobel.Include(p => p.Categoria);
+            var premioNobel = db.PremioNobel.Include(p => p.Categoria);//.OrderBy(p=>p.Ano);
             return View(premioNobel.ToList());
         }
 

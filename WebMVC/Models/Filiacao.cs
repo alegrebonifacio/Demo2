@@ -7,25 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebMVC
+namespace WebMVC.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Laureado
+    public partial class Filiacao
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Laureado()
+        public Filiacao()
         {
-            this.PremioNobel = new HashSet<PremioNobel>();
+            this.LaureadoIndividuo = new HashSet<LaureadoIndividuo>();
         }
     
-        public int LaureadoId { get; set; }
-        public string LaureadoTipo { get; set; }
+        public int FiliacaoId { get; set; }
+        public string Nome { get; set; }
+        public int CidadeId { get; set; }
     
-        public virtual LaureadoIndividuo LaureadoIndividuo { get; set; }
-        public virtual LaureadoOrganizacao LaureadoOrganizacao { get; set; }
+        public virtual Cidade Cidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PremioNobel> PremioNobel { get; set; }
+        public virtual ICollection<LaureadoIndividuo> LaureadoIndividuo { get; set; }
     }
 }
