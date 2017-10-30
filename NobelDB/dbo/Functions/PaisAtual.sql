@@ -15,7 +15,7 @@ BEGIN
 	declare @paisAtualId int
 
 
-	select @paisAtualId = pais.PaisAtualId from pais where PaisId = @PaisId
+	--select @paisAtualId = pais.PaisAtualId from pais where PaisId = @PaisId
 
 	if @paisAtualId is not null
 		return @paisAtualId

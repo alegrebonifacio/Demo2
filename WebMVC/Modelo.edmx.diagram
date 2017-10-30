@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf60f767faba4144ba8863e37fcaefc8" Name="Diagram1" ZoomLevel="147">
+        <EntityTypeShape EntityType="NobelModel.Categoria" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NobelModel.Cidade" Width="2" PointX="2.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NobelModel.Filiacao" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NobelModel.Laureado" Width="2.375" PointX="4.375" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NobelModel.LaureadoIndividuo" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NobelModel.LaureadoOrganizacao" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NobelModel.Pais" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NobelModel.PremioNobel" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="NobelModel.FK_PremioNobel_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.FK_Cidade_Cidade" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.FK_Cidade_Pais" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.FK_Filiacao_Cidade" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.FK_Individuo_Cidade" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.FK_Individuo_Cidade1" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.FK_Individuo_Laureado" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.FK_LaureadoOrganizacao_Laureado" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.FK_Pais_Pais" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.LaureadoIndividuoFiliacao" ManuallyRouted="false" />
+        <AssociationConnector Association="NobelModel.LaureadoPremioNobel" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
