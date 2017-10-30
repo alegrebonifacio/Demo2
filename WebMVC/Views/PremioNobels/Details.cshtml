@@ -1,50 +1,50 @@
 ﻿@model WebMVC.Models.PremioNobel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Prémios Nobel - Detalhes";
 }
-
-<h2>Details</h2>
-
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
 <div>
-    <h4>PremioNobel</h4>
-    <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Ano)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ano)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Motivacao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Motivacao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Categoria.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Categoria.Nome)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.Ano)</dt>
+        <dd>@Html.DisplayFor(model => model.Ano)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Titulo)</dt>
+        <dd>@Html.DisplayFor(model => model.Titulo)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Motivacao)</dt>
+        <dd>@Html.DisplayFor(model => model.Motivacao)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Categoria.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Categoria.Nome)</dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PremioNobelId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<hr />
+<div class="btn-group">
+    <a href="@Url.Action("Edit", new { id = Model.PremioNobelId })" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+    <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-list"></i></a>
+</div>
+@if (Model.Laureado.Count > 0)
+{
+    <hr />
+    if (Model.Laureado.Count == 1)
+    {
+        <h3>Laureado</h3>
+    }
+    else
+    {
+        <h3>Laureados</h3>
+    }
+    <ul>
+        @foreach (var item in Model.Laureado)
+        {
+            if (item.LaureadoTipo == "I")
+            {
+                <li><i class="fa fa-user"></i> <a href="@Url.Action("Details", "LaureadosIndividuos", new { id = item.LaureadoTipo })">@Html.Raw(item.LaureadoIndividuo.Nome)</a></li>
+            }
+            else
+            {
+                <li><i class="fa fa-globe"></i> <a href="@Url.Action("Details", "LaureadosOrganizacoes", new { id = item.LaureadoTipo })">@Html.Raw(item.LaureadoOrganizacao.Nome)</a></li>
+            }
+        }
+    </ul>
+}
