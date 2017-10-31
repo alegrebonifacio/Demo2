@@ -15,17 +15,44 @@ namespace WebMVC.Controllers
     {
         private NobelEntities db = new NobelEntities();
 
+        //public ActionResult IndexCategoria(int? page, string searchStr, int categoriaId)
+        //{
+        //    int aPage = (page ?? 1);
+        //    int pageSize = Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["ItemsPorPagina"]);
+        //    ViewBag.searchStr = searchStr;
+
+        //    var x = db.PremioNobel.AsQueryable();
+
+        //    if (!string.IsNullOrEmpty(searchStr))
+        //        x = x.Where(p => p.Titulo.Contains(searchStr));
+
+        //    x = x.Where(xpto => xpto.CategoriaId != categoriaId);
+
+        //    return View(x.Include(p => p.Categoria).OrderBy(p => p.Ano).ToPagedList(aPage, pageSize));
+
+        //}
         // GET: PremioNobels
         public ActionResult Index(int? page, string searchStr)
         {
             int aPage = (page ?? 1);
             int pageSize = Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["ItemsPorPagina"]);
             ViewBag.searchStr = searchStr;
-            if (!String.IsNullOrEmpty(searchStr))
-            {
-                return View(db.PremioNobel.Where(p => p.Titulo.Contains(searchStr)).Include(p => p.Categoria).OrderBy(p => p.Ano).ToPagedList(aPage, pageSize));
-            }
-            return View(db.PremioNobel.Include(p => p.Categoria).OrderBy(p => p.Ano).ToPagedList(aPage, pageSize));
+
+            var x = db.PremioNobel.AsQueryable();
+            
+            if (!string.IsNullOrEmpty(searchStr))
+                x = x.Where(p => p.Titulo.Contains(searchStr));
+
+            //int categoriaId = 1;
+            //x = x.Where(xpto => xpto.CategoriaId == categoriaId);
+            
+            return View(x.Include(p => p.Categoria).OrderBy(p => p.Ano).ToPagedList(aPage, pageSize));
+
+            //if (!String.IsNullOrEmpty(searchStr))
+            //{
+            //    return View(db.PremioNobel.Where(p => p.Titulo.Contains(searchStr)).Include(p => p.Categoria).OrderBy(p => p.Ano).ToPagedList(aPage, pageSize));
+            //}
+            //return View(db.PremioNobel.Include(p => p.Categoria).OrderBy(p => p.Ano).ToPagedList(aPage, pageSize));
         }
 
         // GET: PremioNobels/Details/5
