@@ -2,3 +2,7 @@
 body { font-family: 'Open Sans', sans-serif; }
 .body-content {padding-top : 52px; padding-bottom: 52px; }
 footer { line-height: 42px;}
+
+.pagination-label-container {height:79px; padding-top:15px;text-align:left; }
+.pagination-left-container {float:left; padding-top:15px; width:30%; }
+.pagination-right-container {float:right; width:70%; text-align:right; }

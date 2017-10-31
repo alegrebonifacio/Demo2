@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebMVC.Models;
+using PagedList;
 
 namespace WebMVC.Controllers
 {
@@ -15,11 +16,16 @@ namespace WebMVC.Controllers
         private NobelEntities db = new NobelEntities();
 
         // GET: PremioNobels
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchStr)
         {
-            //var premioNobel = db.PremioNobel.Include(p => p.Categoria);
-            var premioNobel = db.PremioNobel.Include(p => p.Categoria).OrderBy(p=>p.Ano);
-            return View(premioNobel.ToList());
+            int aPage = (page ?? 1);
+            int pageSize = Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["ItemsPorPagina"]);
+            ViewBag.searchStr = searchStr;
+            if (!String.IsNullOrEmpty(searchStr))
+            {
+                return View(db.PremioNobel.Where(p => p.Titulo.Contains(searchStr)).Include(p => p.Categoria).OrderBy(p => p.Ano).ToPagedList(aPage, pageSize));
+            }
+            return View(db.PremioNobel.Include(p => p.Categoria).OrderBy(p => p.Ano).ToPagedList(aPage, pageSize));
         }
 
         // GET: PremioNobels/Details/5
