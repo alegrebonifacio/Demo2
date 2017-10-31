@@ -25,12 +25,14 @@
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Ano)</td>
             <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
-            <td>@Html.DisplayFor(modelItem => item.Motivacao)</td>
+            <td>@Html.Raw(item.Motivacao)</td>
             <td>@Html.DisplayFor(modelItem => item.Categoria.Nome)</td>
             <td class="text-right">
-                @Html.ActionLink("Edit", "Edit", new { id = item.PremioNobelId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PremioNobelId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PremioNobelId })
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit", new { id = item.PremioNobelId })" class="btn btn-default" title="Edit"><i class="fa fa-pencil"></i></a>
+                    <a href="@Url.Action("Details", new { id = item.PremioNobelId })" class="btn btn-default" title="Details"><i class="fa fa-search"></i></a>
+                    <a href="@Url.Action("Delete", new { id = item.PremioNobelId })" class="btn btn-default" title="Delete"><i class="fa fa-trash-o"></i></a>
+                </div>
             </td>
         </tr>
     }

@@ -1,5 +1,4 @@
 ﻿@model WebMVC.Models.PremioNobel
-
 @{
     ViewBag.Title = "Prémios Nobel - Detalhes";
 }
@@ -13,7 +12,7 @@
         <dt>@Html.DisplayNameFor(model => model.Titulo)</dt>
         <dd>@Html.DisplayFor(model => model.Titulo)</dd>
         <dt>@Html.DisplayNameFor(model => model.Motivacao)</dt>
-        <dd>@Html.DisplayFor(model => model.Motivacao)</dd>
+        <dd>@Html.Raw(Model.Motivacao)</dd>
         <dt>@Html.DisplayNameFor(model => model.Categoria.Nome)</dt>
         <dd>@Html.DisplayFor(model => model.Categoria.Nome)</dd>
     </dl>
@@ -39,11 +38,15 @@
         {
             if (item.LaureadoTipo == "I")
             {
-                <li><i class="fa fa-user"></i> <a href="@Url.Action("Details", "LaureadosIndividuos", new { id = item.LaureadoTipo })">@Html.Raw(item.LaureadoIndividuo.Nome)</a></li>
+                <li><i class="fa fa-user"></i> 
+        <a href="@Url.Action("Details", "LaureadoIndividuos", 
+                new {  id = item.LaureadoId })">@Html.Raw(item.LaureadoIndividuo.Nome)</a></li>
             }
             else
             {
-                <li><i class="fa fa-globe"></i> <a href="@Url.Action("Details", "LaureadosOrganizacoes", new { id = item.LaureadoTipo })">@Html.Raw(item.LaureadoOrganizacao.Nome)</a></li>
+                <li><i class="fa fa-building"></i> 
+        <a href="@Url.Action("Details", "LaureadoOrganizacaos", 
+                new { id = item.LaureadoId })">@Html.Raw(item.LaureadoOrganizacao.Nome)</a></li>
             }
         }
     </ul>
