@@ -1,0 +1,719 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NobelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaId" />
+          </Key>
+          <Property Name="CategoriaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="CidadeId" />
+          </Key>
+          <Property Name="CidadeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PaisId" Type="int" Nullable="false" />
+          <Property Name="CidadeAtualId" Type="int" />
+        </EntityType>
+        <EntityType Name="Filiacao">
+          <Key>
+            <PropertyRef Name="FiliacaoId" />
+          </Key>
+          <Property Name="FiliacaoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CidadeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Laureado">
+          <Key>
+            <PropertyRef Name="LaureadoId" />
+          </Key>
+          <Property Name="LaureadoId" Type="int" Nullable="false" />
+          <Property Name="LaureadoTipo" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LaureadoIndividuo">
+          <Key>
+            <PropertyRef Name="LaureadoId" />
+          </Key>
+          <Property Name="LaureadoId" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DataNascimento" Type="date" Nullable="false" />
+          <Property Name="DataMorte" Type="date" />
+          <Property Name="CidadeNascimentoId" Type="int" Nullable="false" />
+          <Property Name="CidadeMorteId" Type="int" />
+          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LaureadoIndividuoFiliacao">
+          <Key>
+            <PropertyRef Name="LaureadoId" />
+            <PropertyRef Name="FiliacaoId" />
+          </Key>
+          <Property Name="LaureadoId" Type="int" Nullable="false" />
+          <Property Name="FiliacaoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LaureadoOrganizacao">
+          <Key>
+            <PropertyRef Name="LaureadoId" />
+          </Key>
+          <Property Name="LaureadoId" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LaureadoPremioNobel">
+          <Key>
+            <PropertyRef Name="LaureadoId" />
+            <PropertyRef Name="PremioNobelId" />
+          </Key>
+          <Property Name="LaureadoId" Type="int" Nullable="false" />
+          <Property Name="PremioNobelId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="PaisId" />
+          </Key>
+          <Property Name="PaisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PaisAtualId" Type="int" />
+        </EntityType>
+        <EntityType Name="PremioNobel">
+          <Key>
+            <PropertyRef Name="PremioNobelId" />
+          </Key>
+          <Property Name="PremioNobelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ano" Type="int" Nullable="false" />
+          <Property Name="CategoriaId" Type="int" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Motivacao" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_Cidade_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="0..1" />
+          <End Role="Cidade1" Type="Self.Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="Cidade1">
+              <PropertyRef Name="CidadeAtualId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cidade_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Cidade">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Filiacao_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Filiacao" Type="Self.Filiacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="Filiacao">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individuo_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="LaureadoIndividuo" Type="Self.LaureadoIndividuo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="LaureadoIndividuo">
+              <PropertyRef Name="CidadeNascimentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individuo_Cidade1">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="0..1" />
+          <End Role="LaureadoIndividuo" Type="Self.LaureadoIndividuo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="LaureadoIndividuo">
+              <PropertyRef Name="CidadeMorteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individuo_Laureado">
+          <End Role="Laureado" Type="Self.Laureado" Multiplicity="1" />
+          <End Role="LaureadoIndividuo" Type="Self.LaureadoIndividuo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Laureado">
+              <PropertyRef Name="LaureadoId" />
+            </Principal>
+            <Dependent Role="LaureadoIndividuo">
+              <PropertyRef Name="LaureadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LaureadoIndividuoFiliacao_Filiacao">
+          <End Role="Filiacao" Type="Self.Filiacao" Multiplicity="1" />
+          <End Role="LaureadoIndividuoFiliacao" Type="Self.LaureadoIndividuoFiliacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filiacao">
+              <PropertyRef Name="FiliacaoId" />
+            </Principal>
+            <Dependent Role="LaureadoIndividuoFiliacao">
+              <PropertyRef Name="FiliacaoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LaureadoIndividuoFiliacao_LaureadoIndividuo">
+          <End Role="LaureadoIndividuo" Type="Self.LaureadoIndividuo" Multiplicity="1" />
+          <End Role="LaureadoIndividuoFiliacao" Type="Self.LaureadoIndividuoFiliacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LaureadoIndividuo">
+              <PropertyRef Name="LaureadoId" />
+            </Principal>
+            <Dependent Role="LaureadoIndividuoFiliacao">
+              <PropertyRef Name="LaureadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LaureadoOrganizacao_Laureado">
+          <End Role="Laureado" Type="Self.Laureado" Multiplicity="1" />
+          <End Role="LaureadoOrganizacao" Type="Self.LaureadoOrganizacao" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Laureado">
+              <PropertyRef Name="LaureadoId" />
+            </Principal>
+            <Dependent Role="LaureadoOrganizacao">
+              <PropertyRef Name="LaureadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LaureadoPremioNobel_Laureado">
+          <End Role="Laureado" Type="Self.Laureado" Multiplicity="1" />
+          <End Role="LaureadoPremioNobel" Type="Self.LaureadoPremioNobel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laureado">
+              <PropertyRef Name="LaureadoId" />
+            </Principal>
+            <Dependent Role="LaureadoPremioNobel">
+              <PropertyRef Name="LaureadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LaureadoPremioNobel_PremioNobel">
+          <End Role="PremioNobel" Type="Self.PremioNobel" Multiplicity="1" />
+          <End Role="LaureadoPremioNobel" Type="Self.LaureadoPremioNobel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PremioNobel">
+              <PropertyRef Name="PremioNobelId" />
+            </Principal>
+            <Dependent Role="LaureadoPremioNobel">
+              <PropertyRef Name="PremioNobelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pais_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Pais1" Type="Self.Pais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Pais1">
+              <PropertyRef Name="PaisAtualId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremioNobel_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="PremioNobel" Type="Self.PremioNobel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaId" />
+            </Principal>
+            <Dependent Role="PremioNobel">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="LaureadosPorPaisAtual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="paisId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PaisAtual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="PaisId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="NobelModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Filiacao" EntityType="Self.Filiacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laureado" EntityType="Self.Laureado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaureadoIndividuo" EntityType="Self.LaureadoIndividuo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaureadoIndividuoFiliacao" EntityType="Self.LaureadoIndividuoFiliacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaureadoOrganizacao" EntityType="Self.LaureadoOrganizacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaureadoPremioNobel" EntityType="Self.LaureadoPremioNobel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PremioNobel" EntityType="Self.PremioNobel" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cidade_Cidade" Association="Self.FK_Cidade_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Cidade1" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cidade_Pais" Association="Self.FK_Cidade_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Filiacao_Cidade" Association="Self.FK_Filiacao_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Filiacao" EntitySet="Filiacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individuo_Cidade" Association="Self.FK_Individuo_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="LaureadoIndividuo" EntitySet="LaureadoIndividuo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individuo_Cidade1" Association="Self.FK_Individuo_Cidade1">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="LaureadoIndividuo" EntitySet="LaureadoIndividuo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individuo_Laureado" Association="Self.FK_Individuo_Laureado">
+            <End Role="Laureado" EntitySet="Laureado" />
+            <End Role="LaureadoIndividuo" EntitySet="LaureadoIndividuo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LaureadoIndividuoFiliacao_Filiacao" Association="Self.FK_LaureadoIndividuoFiliacao_Filiacao">
+            <End Role="Filiacao" EntitySet="Filiacao" />
+            <End Role="LaureadoIndividuoFiliacao" EntitySet="LaureadoIndividuoFiliacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LaureadoIndividuoFiliacao_LaureadoIndividuo" Association="Self.FK_LaureadoIndividuoFiliacao_LaureadoIndividuo">
+            <End Role="LaureadoIndividuo" EntitySet="LaureadoIndividuo" />
+            <End Role="LaureadoIndividuoFiliacao" EntitySet="LaureadoIndividuoFiliacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LaureadoOrganizacao_Laureado" Association="Self.FK_LaureadoOrganizacao_Laureado">
+            <End Role="Laureado" EntitySet="Laureado" />
+            <End Role="LaureadoOrganizacao" EntitySet="LaureadoOrganizacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LaureadoPremioNobel_Laureado" Association="Self.FK_LaureadoPremioNobel_Laureado">
+            <End Role="Laureado" EntitySet="Laureado" />
+            <End Role="LaureadoPremioNobel" EntitySet="LaureadoPremioNobel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LaureadoPremioNobel_PremioNobel" Association="Self.FK_LaureadoPremioNobel_PremioNobel">
+            <End Role="PremioNobel" EntitySet="PremioNobel" />
+            <End Role="LaureadoPremioNobel" EntitySet="LaureadoPremioNobel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pais_Pais" Association="Self.FK_Pais_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Pais1" EntitySet="Pais" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremioNobel_Categoria" Association="Self.FK_PremioNobel_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="PremioNobel" EntitySet="PremioNobel" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NobelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaId" />
+          </Key>
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PremioNobel" Relationship="Self.FK_PremioNobel_Categoria" FromRole="Categoria" ToRole="PremioNobel" />
+        </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="CidadeId" />
+          </Key>
+          <Property Name="CidadeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PaisId" Type="Int32" Nullable="false" />
+          <Property Name="CidadeAtualId" Type="Int32" />
+          <NavigationProperty Name="CidadeAntiga" Relationship="Self.FK_Cidade_Cidade" FromRole="Cidade" ToRole="Cidade1" />
+          <NavigationProperty Name="CidadeAtual" Relationship="Self.FK_Cidade_Cidade" FromRole="Cidade1" ToRole="Cidade" />
+          <NavigationProperty Name="Pais" Relationship="Self.FK_Cidade_Pais" FromRole="Cidade" ToRole="Pais" />
+          <NavigationProperty Name="Filiacao" Relationship="Self.FK_Filiacao_Cidade" FromRole="Cidade" ToRole="Filiacao" />
+          <NavigationProperty Name="LaureadoIndividuoNascimento" Relationship="Self.FK_Individuo_Cidade" FromRole="Cidade" ToRole="LaureadoIndividuo" />
+          <NavigationProperty Name="LaureadoIndividuoMorte" Relationship="Self.FK_Individuo_Cidade1" FromRole="Cidade" ToRole="LaureadoIndividuo" />
+        </EntityType>
+        <EntityType Name="Filiacao">
+          <Key>
+            <PropertyRef Name="FiliacaoId" />
+          </Key>
+          <Property Name="FiliacaoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CidadeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cidade" Relationship="Self.FK_Filiacao_Cidade" FromRole="Filiacao" ToRole="Cidade" />
+          <NavigationProperty Name="LaureadoIndividuo" Relationship="Self.LaureadoIndividuoFiliacao" FromRole="Filiacao" ToRole="LaureadoIndividuo" />
+        </EntityType>
+        <EntityType Name="Laureado">
+          <Key>
+            <PropertyRef Name="LaureadoId" />
+          </Key>
+          <Property Name="LaureadoId" Type="Int32" Nullable="false" />
+          <Property Name="LaureadoTipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LaureadoIndividuo" Relationship="Self.FK_Individuo_Laureado" FromRole="Laureado" ToRole="LaureadoIndividuo" />
+          <NavigationProperty Name="LaureadoOrganizacao" Relationship="Self.FK_LaureadoOrganizacao_Laureado" FromRole="Laureado" ToRole="LaureadoOrganizacao" />
+          <NavigationProperty Name="PremioNobel" Relationship="Self.LaureadoPremioNobel" FromRole="Laureado" ToRole="PremioNobel" />
+        </EntityType>
+        <EntityType Name="LaureadoIndividuo">
+          <Key>
+            <PropertyRef Name="LaureadoId" />
+          </Key>
+          <Property Name="LaureadoId" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataNascimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataMorte" Type="DateTime" Precision="0" />
+          <Property Name="CidadeNascimentoId" Type="Int32" Nullable="false" />
+          <Property Name="CidadeMorteId" Type="Int32" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CidadeNascimento" Relationship="Self.FK_Individuo_Cidade" FromRole="LaureadoIndividuo" ToRole="Cidade" />
+          <NavigationProperty Name="CidadeMorte" Relationship="Self.FK_Individuo_Cidade1" FromRole="LaureadoIndividuo" ToRole="Cidade" />
+          <NavigationProperty Name="Laureado" Relationship="Self.FK_Individuo_Laureado" FromRole="LaureadoIndividuo" ToRole="Laureado" />
+          <NavigationProperty Name="Filiacao" Relationship="Self.LaureadoIndividuoFiliacao" FromRole="LaureadoIndividuo" ToRole="Filiacao" />
+        </EntityType>
+        <EntityType Name="LaureadoOrganizacao">
+          <Key>
+            <PropertyRef Name="LaureadoId" />
+          </Key>
+          <Property Name="LaureadoId" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Laureado" Relationship="Self.FK_LaureadoOrganizacao_Laureado" FromRole="LaureadoOrganizacao" ToRole="Laureado" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="PaisId" />
+          </Key>
+          <Property Name="PaisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PaisAtualId" Type="Int32" />
+          <NavigationProperty Name="Cidade" Relationship="Self.FK_Cidade_Pais" FromRole="Pais" ToRole="Cidade" />
+          <NavigationProperty Name="PaisAntigo" Relationship="Self.FK_Pais_Pais" FromRole="Pais" ToRole="Pais1" />
+          <NavigationProperty Name="PaisAtual" Relationship="Self.FK_Pais_Pais" FromRole="Pais1" ToRole="Pais" />
+        </EntityType>
+        <EntityType Name="PremioNobel">
+          <Key>
+            <PropertyRef Name="PremioNobelId" />
+          </Key>
+          <Property Name="PremioNobelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ano" Type="Int32" Nullable="false" />
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Motivacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_PremioNobel_Categoria" FromRole="PremioNobel" ToRole="Categoria" />
+          <NavigationProperty Name="Laureado" Relationship="Self.LaureadoPremioNobel" FromRole="PremioNobel" ToRole="Laureado" />
+        </EntityType>
+        <Association Name="FK_PremioNobel_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="PremioNobel" Type="Self.PremioNobel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaId" />
+            </Principal>
+            <Dependent Role="PremioNobel">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cidade_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="0..1" />
+          <End Role="Cidade1" Type="Self.Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="Cidade1">
+              <PropertyRef Name="CidadeAtualId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cidade_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Cidade">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Filiacao_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Filiacao" Type="Self.Filiacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="Filiacao">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individuo_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="LaureadoIndividuo" Type="Self.LaureadoIndividuo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="LaureadoIndividuo">
+              <PropertyRef Name="CidadeNascimentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individuo_Cidade1">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="0..1" />
+          <End Role="LaureadoIndividuo" Type="Self.LaureadoIndividuo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="LaureadoIndividuo">
+              <PropertyRef Name="CidadeMorteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individuo_Laureado">
+          <End Role="Laureado" Type="Self.Laureado" Multiplicity="1" />
+          <End Role="LaureadoIndividuo" Type="Self.LaureadoIndividuo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Laureado">
+              <PropertyRef Name="LaureadoId" />
+            </Principal>
+            <Dependent Role="LaureadoIndividuo">
+              <PropertyRef Name="LaureadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LaureadoOrganizacao_Laureado">
+          <End Role="Laureado" Type="Self.Laureado" Multiplicity="1" />
+          <End Role="LaureadoOrganizacao" Type="Self.LaureadoOrganizacao" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Laureado">
+              <PropertyRef Name="LaureadoId" />
+            </Principal>
+            <Dependent Role="LaureadoOrganizacao">
+              <PropertyRef Name="LaureadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pais_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Pais1" Type="Self.Pais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Pais1">
+              <PropertyRef Name="PaisAtualId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LaureadoIndividuoFiliacao">
+          <End Role="Filiacao" Type="Self.Filiacao" Multiplicity="*" />
+          <End Role="LaureadoIndividuo" Type="Self.LaureadoIndividuo" Multiplicity="*" />
+        </Association>
+        <Association Name="LaureadoPremioNobel">
+          <End Role="Laureado" Type="Self.Laureado" Multiplicity="*" />
+          <End Role="PremioNobel" Type="Self.PremioNobel" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="NobelEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" />
+          <EntitySet Name="Filiacao" EntityType="Self.Filiacao" />
+          <EntitySet Name="Laureado" EntityType="Self.Laureado" />
+          <EntitySet Name="LaureadoIndividuo" EntityType="Self.LaureadoIndividuo" />
+          <EntitySet Name="LaureadoOrganizacao" EntityType="Self.LaureadoOrganizacao" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" />
+          <EntitySet Name="PremioNobel" EntityType="Self.PremioNobel" />
+          <AssociationSet Name="FK_PremioNobel_Categoria" Association="Self.FK_PremioNobel_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="PremioNobel" EntitySet="PremioNobel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cidade_Cidade" Association="Self.FK_Cidade_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Cidade1" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cidade_Pais" Association="Self.FK_Cidade_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Filiacao_Cidade" Association="Self.FK_Filiacao_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Filiacao" EntitySet="Filiacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individuo_Cidade" Association="Self.FK_Individuo_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="LaureadoIndividuo" EntitySet="LaureadoIndividuo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individuo_Cidade1" Association="Self.FK_Individuo_Cidade1">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="LaureadoIndividuo" EntitySet="LaureadoIndividuo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individuo_Laureado" Association="Self.FK_Individuo_Laureado">
+            <End Role="Laureado" EntitySet="Laureado" />
+            <End Role="LaureadoIndividuo" EntitySet="LaureadoIndividuo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LaureadoOrganizacao_Laureado" Association="Self.FK_LaureadoOrganizacao_Laureado">
+            <End Role="Laureado" EntitySet="Laureado" />
+            <End Role="LaureadoOrganizacao" EntitySet="LaureadoOrganizacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pais_Pais" Association="Self.FK_Pais_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Pais1" EntitySet="Pais" />
+          </AssociationSet>
+          <AssociationSet Name="LaureadoIndividuoFiliacao" Association="Self.LaureadoIndividuoFiliacao">
+            <End Role="Filiacao" EntitySet="Filiacao" />
+            <End Role="LaureadoIndividuo" EntitySet="LaureadoIndividuo" />
+          </AssociationSet>
+          <AssociationSet Name="LaureadoPremioNobel" Association="Self.LaureadoPremioNobel">
+            <End Role="Laureado" EntitySet="Laureado" />
+            <End Role="PremioNobel" EntitySet="PremioNobel" />
+          </AssociationSet>
+          <FunctionImport Name="LaureadosPorPaisAtual" ReturnType="Collection(NobelModel.LaureadosPorPaisAtual_Result)">
+            <Parameter Name="paisId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="LaureadosPorPaisAtual_Result">
+          <Property Type="Int32" Name="count" Nullable="true" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NobelModelStoreContainer" CdmEntityContainer="NobelEntities1">
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="NobelModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cidade">
+            <EntityTypeMapping TypeName="NobelModel.Cidade">
+              <MappingFragment StoreEntitySet="Cidade">
+                <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="CidadeAtualId" ColumnName="CidadeAtualId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Filiacao">
+            <EntityTypeMapping TypeName="NobelModel.Filiacao">
+              <MappingFragment StoreEntitySet="Filiacao">
+                <ScalarProperty Name="FiliacaoId" ColumnName="FiliacaoId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laureado">
+            <EntityTypeMapping TypeName="NobelModel.Laureado">
+              <MappingFragment StoreEntitySet="Laureado">
+                <ScalarProperty Name="LaureadoId" ColumnName="LaureadoId" />
+                <ScalarProperty Name="LaureadoTipo" ColumnName="LaureadoTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LaureadoIndividuo">
+            <EntityTypeMapping TypeName="NobelModel.LaureadoIndividuo">
+              <MappingFragment StoreEntitySet="LaureadoIndividuo">
+                <ScalarProperty Name="LaureadoId" ColumnName="LaureadoId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+                <ScalarProperty Name="DataMorte" ColumnName="DataMorte" />
+                <ScalarProperty Name="CidadeNascimentoId" ColumnName="CidadeNascimentoId" />
+                <ScalarProperty Name="CidadeMorteId" ColumnName="CidadeMorteId" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LaureadoOrganizacao">
+            <EntityTypeMapping TypeName="NobelModel.LaureadoOrganizacao">
+              <MappingFragment StoreEntitySet="LaureadoOrganizacao">
+                <ScalarProperty Name="LaureadoId" ColumnName="LaureadoId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="NobelModel.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PaisAtualId" ColumnName="PaisAtualId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PremioNobel">
+            <EntityTypeMapping TypeName="NobelModel.PremioNobel">
+              <MappingFragment StoreEntitySet="PremioNobel">
+                <ScalarProperty Name="PremioNobelId" ColumnName="PremioNobelId" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Motivacao" ColumnName="Motivacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LaureadoIndividuoFiliacao" TypeName="NobelModel.LaureadoIndividuoFiliacao" StoreEntitySet="LaureadoIndividuoFiliacao">
+            <EndProperty Name="Filiacao">
+              <ScalarProperty Name="FiliacaoId" ColumnName="FiliacaoId" />
+            </EndProperty>
+            <EndProperty Name="LaureadoIndividuo">
+              <ScalarProperty Name="LaureadoId" ColumnName="LaureadoId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LaureadoPremioNobel" TypeName="NobelModel.LaureadoPremioNobel" StoreEntitySet="LaureadoPremioNobel">
+            <EndProperty Name="Laureado">
+              <ScalarProperty Name="LaureadoId" ColumnName="LaureadoId" />
+            </EndProperty>
+            <EndProperty Name="PremioNobel">
+              <ScalarProperty Name="PremioNobelId" ColumnName="PremioNobelId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="LaureadosPorPaisAtual" FunctionName="NobelModel.Store.LaureadosPorPaisAtual">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NobelModel.LaureadosPorPaisAtual_Result">
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
