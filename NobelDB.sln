@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NobelDB", "NobelDB\NobelDB.sqlproj", "{1913E1CF-B87B-435A-83CD-58B518A0A61D}"
 EndProject
@@ -12,6 +12,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NobelApp", "NobelApp\NobelApp.csproj", "{B4D8DFB8-2819-4797-B7E4-83DF1AE379A6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A4184198-3416-4E3C-9B81-88396ABBEB2D} = {A4184198-3416-4E3C-9B81-88396ABBEB2D}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentacao", "Documentacao", "{1CD6FA66-5C48-475B-AE9B-D95792506F69}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Dropbox\Projetos\_Planificação\MVC, API, HTML5\1.Git.pptx = ..\..\..\Dropbox\Projetos\_Planificação\MVC, API, HTML5\1.Git.pptx
+		..\..\..\Dropbox\Projetos\_Planificação\MVC, API, HTML5\workshop.pdf = ..\..\..\Dropbox\Projetos\_Planificação\MVC, API, HTML5\workshop.pdf
 	EndProjectSection
 EndProject
 Global
