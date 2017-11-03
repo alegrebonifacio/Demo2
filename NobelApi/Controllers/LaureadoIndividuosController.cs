@@ -26,14 +26,15 @@ namespace NobelApi.Controllers
         /// <returns></returns>
         public IQueryable<LaureadoIndividuoDTO> GetLaureadoIndividuo()
         {
-            return db.LaureadoIndividuo.Select(p => new LaureadoIndividuoDTO
+            return db.LaureadoIndividuo.OrderBy(qu => Guid.NewGuid()).Take(100)
+                .Select(p => new LaureadoIndividuoDTO
             {
                 DataMorte = p.DataMorte,
                 DataNascimento = p.DataNascimento,
                 LaureadoId = p.LaureadoId,
                 Nome = p.Nome,
                 Sexo = p.Sexo
-            });
+            }).OrderBy(p=>p.Nome);
         }
 
         // GET: api/LaureadoIndividuos/5

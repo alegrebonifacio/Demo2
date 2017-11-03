@@ -96,11 +96,13 @@
   <ItemGroup>
     <Content Include="App\main.js" />
     <Content Include="App\viewmodels\flickr.js" />
+    <Content Include="App\viewmodels\laureadoDetalhes.js" />
     <Content Include="App\viewmodels\laureadoIndividuo.js" />
     <Content Include="App\viewmodels\shell.js" />
     <Content Include="App\viewmodels\welcome.js" />
     <Content Include="App\views\detail.html" />
     <Content Include="App\views\flickr.html" />
+    <Content Include="App\views\laureadoDetalhes.html" />
     <Content Include="App\views\laureadoIndividuo.html" />
     <Content Include="App\views\shell.html" />
     <Content Include="App\views\welcome.html" />
@@ -119,6 +121,7 @@
     <Content Include="Content\starterkit.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="images\emptyPerson.jpg" />
     <Content Include="index.html" />
     <Content Include="readme.md" />
     <Content Include="fonts\FontAwesome.otf" />

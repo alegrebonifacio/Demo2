@@ -10,7 +10,8 @@
             router.map([
                 { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
                 { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true },
-                { route: 'laureadoIndividuo', moduleId: 'viewmodels/laureadoIndividuo', nav: true },
+                { route: 'laureadoIndividuo', title:'<i class="fa fa-leaf"></i>', moduleId: 'viewmodels/laureadoIndividuo', nav: true },
+                { route: 'laureadoDetalhes/:id', moduleId: 'viewmodels/laureadoDetalhes', nav: false },
             ]).buildNavigationModel();
             
             return router.activate();
