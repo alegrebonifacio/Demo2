@@ -21,6 +21,35 @@ namespace NobelApi.Controllers
 
         // GET: api/LaureadoIndividuos
         /// <summary>
+        /// Método para a pesquisa por nome na lista de indivíduos laureados
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<LaureadoIndividuoDTO> GetLaureadoIndividuo(string srchName)
+        {
+            if (srchName != null)
+            {
+                return db.LaureadoIndividuo.Where(p => p.Nome.Contains(srchName))
+                    .Select(p => new LaureadoIndividuoDTO
+                    {
+                        DataMorte = p.DataMorte,
+                        DataNascimento = p.DataNascimento,
+                        LaureadoId = p.LaureadoId,
+                        Nome = p.Nome,
+                        Sexo = p.Sexo
+                    }).OrderBy(p => p.Nome);
+
+            }
+            return db.LaureadoIndividuo.OrderBy(qu => Guid.NewGuid()).Take(100)
+                .Select(p => new LaureadoIndividuoDTO
+                {
+                    DataMorte = p.DataMorte,
+                    DataNascimento = p.DataNascimento,
+                    LaureadoId = p.LaureadoId,
+                    Nome = p.Nome,
+                    Sexo = p.Sexo
+                }).OrderBy(p => p.Nome);
+        }
+        /// <summary>
         /// Método para a recolha da lista de indivíduos laureados
         /// </summary>
         /// <returns></returns>
@@ -28,13 +57,13 @@ namespace NobelApi.Controllers
         {
             return db.LaureadoIndividuo.OrderBy(qu => Guid.NewGuid()).Take(100)
                 .Select(p => new LaureadoIndividuoDTO
-            {
-                DataMorte = p.DataMorte,
-                DataNascimento = p.DataNascimento,
-                LaureadoId = p.LaureadoId,
-                Nome = p.Nome,
-                Sexo = p.Sexo
-            }).OrderBy(p=>p.Nome);
+                {
+                    DataMorte = p.DataMorte,
+                    DataNascimento = p.DataNascimento,
+                    LaureadoId = p.LaureadoId,
+                    Nome = p.Nome,
+                    Sexo = p.Sexo
+                }).OrderBy(p => p.Nome);
         }
 
         // GET: api/LaureadoIndividuos/5

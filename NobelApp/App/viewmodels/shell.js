@@ -8,9 +8,9 @@
         },
         activate: function () {
             router.map([
-                { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
-                { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true },
-                { route: 'laureadoIndividuo', title:'<i class="fa fa-leaf"></i>', moduleId: 'viewmodels/laureadoIndividuo', nav: true },
+                { route: '', title:'Welcome', rolhas:'<i class="fa fa-home"></i>', moduleId: 'viewmodels/welcome', nav: true },
+                { route: 'flickr', moduleId: 'viewmodels/flickr', rolhas:'<i class="fa fa-flickr"></i>', nav: true },
+                { route: 'laureadoIndividuo', title: 'Person Page', rolhas:'<i class="fa fa-leaf"></i>', moduleId: 'viewmodels/laureadoIndividuo', nav: true },
                 { route: 'laureadoDetalhes/:id', moduleId: 'viewmodels/laureadoDetalhes', nav: false },
             ]).buildNavigationModel();
             

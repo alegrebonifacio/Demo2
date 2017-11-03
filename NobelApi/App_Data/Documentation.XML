@@ -486,6 +486,12 @@
             Controlador para gestão dos elementos da Tabela LaureadoIndividuo
             </summary>
         </member>
+        <member name="M:NobelApi.Controllers.LaureadoIndividuosController.GetLaureadoIndividuo(System.String)">
+            <summary>
+            Método para a pesquisa por nome na lista de indivíduos laureados
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:NobelApi.Controllers.LaureadoIndividuosController.GetLaureadoIndividuo">
             <summary>
             Método para a recolha da lista de indivíduos laureados

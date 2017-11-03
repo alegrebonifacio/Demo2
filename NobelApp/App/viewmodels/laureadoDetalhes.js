@@ -2,7 +2,7 @@
     var ctor = function () {
         console.log('ViewModel initiated...')
         var self = this;
-        var baseUri = 'http://localhost:56562/api/LaureadoIndividuos/';
+        var baseUri = _baseUrl+'/api/LaureadoIndividuos/';
         this.displayName = 'Detalhes do Laureado';
         this.laureadosURI
         var laureadoId = router.activeInstruction().params[0];
