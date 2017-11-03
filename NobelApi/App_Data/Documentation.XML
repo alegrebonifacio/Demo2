@@ -499,5 +499,23 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:NobelApi.Controllers.PremioNobelsController">
+            <summary>
+            Controlador para gerir a tabela PremioNobel
+            </summary>
+        </member>
+        <member name="M:NobelApi.Controllers.PremioNobelsController.GetPremioNobel">
+            <summary>
+            Método para extrair a lista de Prémios Nobel
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NobelApi.Controllers.PremioNobelsController.GetPremioNobel(System.Int32)">
+            <summary>
+            Método para recolher a informação específica de um Prémio Nobel {id}
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

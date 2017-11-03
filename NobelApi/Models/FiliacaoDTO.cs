@@ -5,7 +5,11 @@ using System.Web;
 
 namespace NobelApi.Models
 {
-    public class FiliacaoDTO
+    public partial class FiliacaoDTO
     {
+        public int FiliacaoId { get; set; }
+        public string Nome { get; set; }
+
+        public virtual CidadeDTO Cidade { get; set; }
     }
 }

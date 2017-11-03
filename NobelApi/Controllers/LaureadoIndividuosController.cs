@@ -50,68 +50,57 @@ namespace NobelApi.Controllers
                 return NotFound();
             }
             LaureadoIndividuoDetailsDTO laureadoIndividuo = null;
-            try
-            {
-                laureadoIndividuo = db.LaureadoIndividuo
-                    .Where(p => p.LaureadoId == id).Select(p => new LaureadoIndividuoDetailsDTO
+            laureadoIndividuo = db.LaureadoIndividuo.Include("Filiacao")
+                .Where(p => p.LaureadoId == id).Select(p => new LaureadoIndividuoDetailsDTO
+                {
+                    LaureadoId = p.LaureadoId,
+                    Sexo = p.Sexo,
+                    Nome = p.Nome,
+                    DataNascimento = p.DataNascimento,
+                    DataMorte = p.DataMorte,
+                    CidadeMorte = p.CidadeMorte != null ? new CidadeDTO()
                     {
-                        LaureadoId = p.LaureadoId,
-                        Sexo = p.Sexo,
-                        Nome = p.Nome,
-                        DataNascimento = p.DataNascimento,
-                        DataMorte = p.DataMorte,
-                        CidadeMorte = new CidadeDTO()
+                        CidadeId = p.CidadeMorte.CidadeId,
+                        Nome = p.CidadeMorte.Nome,
+                        Pais = new PaisDTO()
                         {
-                            CidadeId = p.CidadeMorte.CidadeId,
-                            Nome = p.CidadeMorte.Nome,
-                            Pais = new PaisDTO()
-                            {
-                                PaisId = p.CidadeMorte.PaisId,
-                                Nome = p.CidadeMorte.Pais.Nome
-                            }
-                        },
-                        CidadeNascimento = new CidadeDTO()
-                        {
-                            CidadeId = p.CidadeNascimento.CidadeId,
-                            Nome = p.CidadeNascimento.Nome,
-                            Pais = new PaisDTO()
-                            {
-                                PaisId = p.CidadeNascimento.PaisId,
-                                Nome = p.CidadeNascimento.Pais.Nome,
-                            }
-                        },
-                        //PremioNobel = new List<PremioNobelDTO>()
-                    }).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                laureadoIndividuo = db.LaureadoIndividuo
-                    .Where(p => p.LaureadoId == id).Select(p => new LaureadoIndividuoDetailsDTO
+                            PaisId = p.CidadeMorte.PaisId,
+                            Nome = p.CidadeMorte.Pais.Nome
+                        }
+                    } : null,
+                    CidadeNascimento = new CidadeDTO()
                     {
-                        LaureadoId = p.LaureadoId,
-                        Sexo = p.Sexo,
-                        Nome = p.Nome,
-                        Picture = "https://www.nobelprize.org/nobel_prizes/medicine/laureates/1949/moniz_postcard.jpg",
-                        Thumbnail = "https://www.nobelprize.org/nobel_prizes/medicine/laureates/1949/moniz_thumb.jpg",
-                        DataNascimento = p.DataNascimento,
-                        DataMorte = p.DataMorte,
-                        CidadeNascimento = new CidadeDTO()
+                        CidadeId = p.CidadeNascimento.CidadeId,
+                        Nome = p.CidadeNascimento.Nome,
+                        Pais = new PaisDTO()
                         {
-                            CidadeId = p.CidadeNascimento.CidadeId,
-                            Nome = p.CidadeNascimento.Nome,
+                            PaisId = p.CidadeNascimento.PaisId,
+                            Nome = p.CidadeNascimento.Pais.Nome,
+                        }
+                    },
+                    //PremioNobel = new List<PremioNobelDTO>()
+                    Filiacao = p.Filiacao.Select(m => new FiliacaoDTO()
+                    {
+                        Nome = m.Nome,
+                        FiliacaoId = m.FiliacaoId,
+                        Cidade = new CidadeDTO()
+                        {
+                            CidadeId = m.Cidade.CidadeId,
+                            Nome = m.Cidade.Nome,
                             Pais = new PaisDTO()
                             {
-                                PaisId = p.CidadeNascimento.PaisId,
-                                Nome = p.CidadeNascimento.Pais.Nome,
+                                PaisId = m.Cidade.PaisId,
+                                Nome = m.Cidade.Pais.Nome
                             }
-                        },
-                        //PremioNobel = new List<PremioNobelDTO>()
-                    }).FirstOrDefault();
-            }
+                        }
+                    }).ToList()
+                }).FirstOrDefault();
+
             if (laureadoIndividuo == null)
             {
                 return NotFound();
             }
+
             List<Laureado> Premios = db.Laureado.Include("PremioNobel").Where(p => p.LaureadoId == id).ToList();
             int index = 0;
             foreach (var item in Premios)
@@ -126,9 +115,10 @@ namespace NobelApi.Controllers
                     premio.Motivacao = newitem.Motivacao;
                     premio.PremioNobelId = newitem.PremioNobelId;
                     premio.Titulo = newitem.Titulo;
+                    if (laureadoIndividuo.PremioNobel == null)
+                        laureadoIndividuo.PremioNobel = new List<PremioNobelDTO>();
                     if (index == 0)
                     {
-                        laureadoIndividuo.PremioNobel = new List<PremioNobelDTO>();
                         //--- "https://www.nobelprize.org/nobel_prizes/medicine/laureates/1949/moniz_postcard.jpg"
                         laureadoIndividuo.Picture = "https://www.nobelprize.org/nobel_prizes/" + newitem.Categoria.Nome.ToLower() + "/laureates/" + newitem.Ano + "/" + getLastNameOf(laureadoIndividuo.Nome) + "_postcard.jpg";
                         laureadoIndividuo.Thumbnail = "https://www.nobelprize.org/nobel_prizes/" + newitem.Categoria.Nome.ToLower() + "/laureates/" + newitem.Ano + "/" + getLastNameOf(laureadoIndividuo.Nome) + "_thumb.jpg";

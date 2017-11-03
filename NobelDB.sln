@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NobelDB", "NobelDB\NobelDB.sqlproj", "{1913E1CF-B87B-435A-83CD-58B518A0A61D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC", "WebMVC\WebMVC.csproj", "{2651A7FE-2A5F-46A1-B6AC-D01298E9F765}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NobelApi", "NobelApi\NobelApi.csproj", "{A4184198-3416-4E3C-9B81-88396ABBEB2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NobelApp", "NobelApp\NobelApp.csproj", "{B4D8DFB8-2819-4797-B7E4-83DF1AE379A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A4184198-3416-4E3C-9B81-88396ABBEB2D} = {A4184198-3416-4E3C-9B81-88396ABBEB2D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +34,10 @@ Global
 		{A4184198-3416-4E3C-9B81-88396ABBEB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4184198-3416-4E3C-9B81-88396ABBEB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4184198-3416-4E3C-9B81-88396ABBEB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4D8DFB8-2819-4797-B7E4-83DF1AE379A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D8DFB8-2819-4797-B7E4-83DF1AE379A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D8DFB8-2819-4797-B7E4-83DF1AE379A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D8DFB8-2819-4797-B7E4-83DF1AE379A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
